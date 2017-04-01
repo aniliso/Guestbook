@@ -1,0 +1,17 @@
+{
+    "name": "Guestbook",
+    "alias": "guestbook",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 1,
+    "providers": [
+        "Modules\\Guestbook\\Providers\\GuestbookServiceProvider",
+        "Modules\\Guestbook\\Providers\\RouteServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        
+    ],
+    "requires": []
+}

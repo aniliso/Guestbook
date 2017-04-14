@@ -4,7 +4,7 @@ use Illuminate\Routing\Router;
 /** @var Router $router */
 
 $router->group(['prefix' =>'/guestbook'], function (Router $router) {
-    $router->bind('comment', function ($id) {
+    $router->bind('guestbookComment', function ($id) {
         return app('Modules\Guestbook\Repositories\CommentRepository')->find($id);
     });
     $router->get('comments', [
@@ -22,17 +22,17 @@ $router->group(['prefix' =>'/guestbook'], function (Router $router) {
         'uses' => 'CommentController@store',
         'middleware' => 'can:guestbook.comments.create'
     ]);
-    $router->get('comments/{comment}/edit', [
+    $router->get('comments/{guestbookComment}/edit', [
         'as' => 'admin.guestbook.comment.edit',
         'uses' => 'CommentController@edit',
         'middleware' => 'can:guestbook.comments.edit'
     ]);
-    $router->put('comments/{comment}', [
+    $router->put('comments/{guestbookComment}', [
         'as' => 'admin.guestbook.comment.update',
         'uses' => 'CommentController@update',
         'middleware' => 'can:guestbook.comments.edit'
     ]);
-    $router->delete('comments/{comment}', [
+    $router->delete('comments/{guestbookComment}', [
         'as' => 'admin.guestbook.comment.destroy',
         'uses' => 'CommentController@destroy',
         'middleware' => 'can:guestbook.comments.destroy'

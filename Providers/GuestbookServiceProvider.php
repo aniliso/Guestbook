@@ -3,12 +3,15 @@
 namespace Modules\Guestbook\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Core\Events\BuildingSidebar;
+use Modules\Core\Traits\CanGetSidebarClassForModule;
 use Modules\Core\Traits\CanPublishConfiguration;
+use Modules\Guestbook\Events\Handlers\RegisterGuestbookSidebar;
 use Modules\Guestbook\Repositories\CommentRepository;
 
 class GuestbookServiceProvider extends ServiceProvider
 {
-    use CanPublishConfiguration;
+    use CanPublishConfiguration, CanGetSidebarClassForModule;
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -24,6 +27,11 @@ class GuestbookServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerBindings();
+
+        $this->app['events']->listen(
+            BuildingSidebar::class,
+            $this->getSidebarClassForModule('guestbook', RegisterGuestbookSidebar::class)
+        );
     }
 
     public function boot()

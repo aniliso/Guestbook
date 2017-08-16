@@ -1,6 +1,7 @@
 {
     "name": "Guestbook",
     "alias": "guestbook",
+    "version": "1.0.1",
     "description": "",
     "keywords": [],
     "active": 1,

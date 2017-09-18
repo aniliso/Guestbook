@@ -4,15 +4,13 @@
     "version": "1.0.1",
     "description": "",
     "keywords": [],
-    "active": 1,
+    "active": 0,
     "order": 1,
     "providers": [
         "Modules\\Guestbook\\Providers\\GuestbookServiceProvider",
         "Modules\\Guestbook\\Providers\\RouteServiceProvider"
     ],
-    "aliases": {},
-    "files": [
-        
-    ],
+    "aliases": [],
+    "files": [],
     "requires": []
 }

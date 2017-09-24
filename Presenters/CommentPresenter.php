@@ -1,6 +1,6 @@
 <?php namespace Modules\Guestbook\Presenters;
 
-use App\Models\Status;
+use Core\Models\Status;
 use Modules\Core\Presenters\BasePresenter;
 
 class CommentPresenter extends BasePresenter

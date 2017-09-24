@@ -58,7 +58,7 @@
         <div class="col-md-2">
             <div class="box">
                 <div class="box-body">
-                    {!! Form::normalSelect('status', trans('global.form.status'), $errors, app(\App\Models\Status::class)->lists(), $comment) !!}
+                    {!! Form::normalSelect('status', trans('global.form.status'), $errors, app(\Core\Models\Status::class)->lists(), $comment) !!}
 
                     {!! Form::normalInput("position", trans('guestbook::comments.form.position'), $errors, $comment) !!}
                 </div>

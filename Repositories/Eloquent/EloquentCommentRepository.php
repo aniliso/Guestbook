@@ -2,7 +2,7 @@
 
 namespace Modules\Guestbook\Repositories\Eloquent;
 
-use App\Models\Status;
+use Core\Models\Status;
 use Modules\Guestbook\Repositories\CommentRepository;
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
 

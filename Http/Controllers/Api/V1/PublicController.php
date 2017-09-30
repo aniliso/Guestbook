@@ -1,13 +1,12 @@
 <?php namespace Modules\Guestbook\Http\Controllers\Api\V1;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use Modules\Core\Http\Controllers\BasePublicController;
 use Modules\Guestbook\Http\Requests\CreateCommentRequest;
 use Modules\Guestbook\Repositories\CommentRepository;
 use Modules\Media\Services\FileService;
 
-class PublicController extends Controller
+class PublicController extends BasePublicController
 {
     /**
      * @var FileService
@@ -20,6 +19,7 @@ class PublicController extends Controller
 
     public function __construct(FileService $fileService, CommentRepository $comment)
     {
+        parent::__construct();
         $this->fileService = $fileService;
         $this->comment = $comment;
     }

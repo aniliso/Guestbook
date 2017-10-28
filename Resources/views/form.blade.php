@@ -51,7 +51,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group" :class="{ 'has-error' : formErrors.message }">
-                                {!! BSForm::textarea('message',old('message'),['placeholder' => trans('guestbook::comments.form.message'), 'v-model'=>'formInputs.message']) !!}
+                                {!! Form::textarea('message',old('message'),['placeholder' => trans('guestbook::comments.form.message'), 'v-model'=>'formInputs.message', 'class'=>'form-control']) !!}
                                 <span v-for="error in formErrors.message" class="help-block validMessage">@{{ error }}</span>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-xs-12">
-                            {!! BSForm::submit(trans('global.buttons.send'), ['class'=>'theme_button color1 btn-lg']) !!}
+                            {!! Form::submit(trans('global.buttons.send'), ['class'=>'theme_button color1 btn-lg']) !!}
                         </div>
                     </div>
                     {!! Form::close() !!}

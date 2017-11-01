@@ -19,10 +19,10 @@ class CreateGuestbookCommentsTable extends Migration
             // Your fields
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('position');
+            $table->string('position')->nullable();
             $table->string('email');
-            $table->string('phone');
-            $table->string('subject');
+            $table->string('phone')->nullable();
+            $table->string('subject')->nullable();
             $table->text('message');
             $table->boolean('status')->default(0);
 

@@ -15,6 +15,6 @@ class EloquentCommentRepository extends EloquentBaseRepository implements Commen
 
     public function paginate($perPage = 15)
     {
-        return $this->model->status(Status::PUBLISHED)->paginate($perPage);
+        return $this->model->status(Status::PUBLISHED)->orderBy('created_at', 'desc')->paginate($perPage);
     }
 }

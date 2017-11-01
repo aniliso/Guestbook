@@ -36,6 +36,8 @@ class GuestbookServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->publishConfig('guestbook', 'config');
+        $this->publishConfig('guestbook', 'settings');
         $this->publishConfig('guestbook', 'permissions');
         $this->publishConfig('guestbook', 'assets');
     }

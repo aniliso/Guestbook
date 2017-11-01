@@ -2,8 +2,8 @@
 
 return [
   'comment' => [
-      'index' => 'hasta/yorumlari',
-      'form'  => 'hasta/yorum',
-      'add'   => 'hasta/yorum/ekle'
+      'index' => 'ziyaretci-defteri',
+      'form'  => 'ziyaretci-defteri/yorum',
+      'add'   => 'ziyaretci-defteri/yorum/ekle'
   ]
 ];

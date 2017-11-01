@@ -18,21 +18,22 @@ return [
         'fullname' => 'Adı Soyadı'
     ],
     'form'             => [
-        'first_name'           => 'Adı',
-        'last_name'            => 'Soyadı',
-        'position'             => 'Pozisyon',
-        'email'                => 'E-Posta',
-        'phone'                => 'Telefon',
-        'subject'              => 'Konu',
-        'message'              => 'Yorum',
-        'captcha_guestbook'    => 'Doğrulama Kodu',
-        'attachment'           => 'Dosya Eki'
+        'first_name'        => 'Adı',
+        'last_name'         => 'Soyadı',
+        'position'          => 'Pozisyon',
+        'email'             => 'E-Posta',
+        'phone'             => 'Telefon',
+        'subject'           => 'Konu',
+        'message'           => 'Yorum',
+        'captcha_guestbook' => 'Doğrulama Kodu',
+        'attachment'        => 'Dosya Eki'
     ],
     'messages'         => [
         'file not selected' => 'Dosya Seçilmedi',
         'created'           => 'Yorum eklendi',
         'success message'   => 'Yorumunuz başarıyla eklendi. En kısa zamanda incelenerek yayınlanacaktır. Teşekkür ederiz.',
         'error message'     => 'Yorumunuzda bir hata oluştu lütfen tekrar deneyiniz',
+        'not found'         => 'Yorum bulunamadı.'
     ],
     'validation'       => [
     ],

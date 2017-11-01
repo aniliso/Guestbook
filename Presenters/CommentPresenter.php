@@ -15,6 +15,14 @@ class CommentPresenter extends BasePresenter
         return app(Status::class)->get($this->entity->status);
     }
 
+    public function firstImage($width, $height, $mode, $quality)
+    {
+        if($file = $this->entity->attachment()->first()) {
+            return \Imagy::getImage($file->filename, $this->zone, ['width' => $width, 'height' => $height, 'mode' => $mode, 'quality' => $quality]);
+        }
+        return false;
+    }
+
     /**
      * Getting the label class for the appropriate status
      * @return string

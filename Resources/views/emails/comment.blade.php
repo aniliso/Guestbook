@@ -18,10 +18,6 @@
             <td>{{ $comment->email }}</td>
         </tr>
         <tr>
-            <th>Konu</th>
-            <td>{{ $comment->subject }}</td>
-        </tr>
-        <tr>
             <th>Yorum</th>
             <td>{{ $comment->message }}</td>
         </tr>

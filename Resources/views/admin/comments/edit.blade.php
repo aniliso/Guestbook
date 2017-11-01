@@ -58,9 +58,16 @@
         <div class="col-md-2">
             <div class="box">
                 <div class="box-body">
-                    {!! Form::normalSelect('status', trans('global.form.status'), $errors, app(\Core\Models\Status::class)->lists(), $comment) !!}
+                    {!! Form::normalSelect('status', trans('global.form.status'), $errors, app(\Modules\Core\Models\Status::class)->lists(), $comment) !!}
 
                     {!! Form::normalInput("position", trans('guestbook::comments.form.position'), $errors, $comment) !!}
+
+                    <div class="form-group">
+                        <label>Resim</label>
+                        @if($image = $comment->present()->firstImage(250,null,'resize',50))
+                            <figure><img class="img-responsive" src="{{ $image }}" alt="{{ $comment->fullname }}" /></figure>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

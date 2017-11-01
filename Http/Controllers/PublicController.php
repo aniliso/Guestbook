@@ -23,7 +23,7 @@ class PublicController extends BasePublicController
      */
     private $fileService;
 
-    private $perPage = 9;
+    private $perPage = 10;
 
     /**
      * PublicController constructor.
@@ -46,7 +46,9 @@ class PublicController extends BasePublicController
 
     public function index()
     {
-        $reviews = $this->comment->paginate($this->perPage);
+        $perPage = setting('guestbook::per_page') ? setting('guestbook::per_page') : $this->perPage;
+
+        $reviews = $this->comment->paginate($perPage);
 
         $title = trans('themes::guestbook.title');
         $url = route('guestbook.comment.index');
@@ -105,17 +107,17 @@ class PublicController extends BasePublicController
         {
             $requestData = $request->all();
             if($request->hasFile('attachment')) {
-                $file = $this->fileService->store($request->attachment);
+                $file = $this->fileService->store($request->file('attachment'));
                 $requestData['attachment'] = $file->id;
             } else {
                 $requestData['attachment'] = null;
             }
             if ($comment = $this->comment->create($requestData)) {
-                \Mail::to(setting('theme::email'))->queue(new GuestbookCommentCreated($comment));
+                \Mail::to(setting('guestbook::email'))->queue(new GuestbookCommentCreated($comment));
             }
             return response()->json([
                 'success' => true,
-                'data' => ['message'=>'Eklendi']
+                'data' => ['message'=>trans('guestbook::comments.messages.success message')]
             ], Response::HTTP_OK);
         }
         catch (\Exception $exception)

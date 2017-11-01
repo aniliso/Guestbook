@@ -19,10 +19,9 @@ class CreateCommentRequest extends BaseFormRequest
             'last_name'            => 'required:min:2',
             'phone'                => 'required|numeric',
             'email'                => 'required|email',
-            'subject'              => 'required|min:10|max:250',
             'message'              => 'required|min:50|max:500',
             'captcha_guestbook'    => 'required|captcha',
-            'attachment'           => 'mimes:jpeg,jpg,png,gif,pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar'
+            'attachment'           => 'mimes:jpeg,jpg,png'
         ];
     }
 
@@ -46,7 +45,7 @@ class CreateCommentRequest extends BaseFormRequest
         return response()->json([
             'success' => false,
             'message' => $errors
-        ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        ], Response::HTTP_BAD_REQUEST);
     }
 
     public function messages()

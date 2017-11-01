@@ -33,7 +33,7 @@ class GuestbookCommentCreated extends Mailable
     public function build()
     {
         if($this->comment->attachment()->exists()) {
-            $this->attach(public_path($this->comment->attachment()->first()->path));
+            $this->attach($this->comment->attachment()->first()->path);
         }
         return $this->view('guestbook::emails.comment')
                     ->subject($this->comment->id . ' No.lu Ziyaretçi Yorumu')

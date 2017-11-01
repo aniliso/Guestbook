@@ -10,7 +10,6 @@
             <div class="row">
                 <div class="col-sm-12">
                     {!! Form::open(['@submit.prevent'=>'submitForm', 'route' => 'guestbook.comment.add', 'files'=>true, 'method'=>'post', 'id'=>'guestbook']) !!}
-                    <pnotify v-if="success" title="{{ trans('guestbook::comments.messages.success title') }}" type="success" content="{{ trans('guestbook::comments.messages.success message') }}"></pnotify>
                     <div class="row">
                         <div class="col-md-6 col-xs-12">
                             <div class="form-group" :class="{ 'has-error' : formErrors.first_name }">
@@ -85,14 +84,15 @@
     </section>
 @endsection
 
-{!! Asset::add(mix('assets/js/manifest.js')->toHtml()) !!}
-{!! Asset::add(mix('assets/js/vendor.js')->toHtml()) !!}
-{!! Asset::add('assets/vendor/jasny-bootstrap/css/jasny-bootstrap.min.css') !!}
-{!! Asset::add('assets/vendor/jasny-bootstrap/js/jasny-bootstrap.min.js') !!}
-{!! Asset::add('assets/vendor/jquery-loadingoverlay/loadingoverlay.min.js') !!}
-{!! Asset::add('assets/vendor/jquery-loadingoverlay/loadingoverlay_progress.min.js') !!}
-
 @push('js_inline')
+<script src="{{ Module::asset('guestbook:js/vue.min.js') }}"></script>
+<script src="{{ Module::asset('guestbook:js/vue-resource.min.js') }}"></script>
+<link rel="stylesheet" href="{!! Module::asset('guestbook:vendor/pnotify/pnotify.css') !!}">
+<script src="{{ Module::asset('guestbook:vendor/pnotify/pnotify.js') }}"></script>
+<link rel="stylesheet" href="{!! Module::asset('guestbook:vendor/jasny-bootstrap/css/jasny-bootstrap.min.css') !!}">
+<script src="{!! Module::asset('guestbook:vendor/jasny-bootstrap/js/jasny-bootstrap.min.js') !!}"></script>
+<script src="{!! Module::asset('guestbook:vendor/jquery-loadingoverlay/loadingoverlay.min.js') !!}"></script>
+<script src="{!! Module::asset('guestbook:vendor/jquery-loadingoverlay/loadingoverlay_progress.min.js') !!}"></script>
 <script src="{!! Module::asset('guestbook:js/guestbook.js') !!}"></script>
 {!! Captcha::setLang(locale())->scriptWithCallback(['captcha_guestbook', 'captcha_ask', 'captcha_contact']) !!}
 @endpush

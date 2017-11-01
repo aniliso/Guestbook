@@ -1,15 +1,3 @@
-PNotify.prototype.options.styling = "bootstrap3";
-Vue.component('pnotify', {
-   props: ['type', 'title', 'content'],
-   template: `
-   <script>
-   new PNotify({
-        text: '{{ content }}',
-        type: '{{ type }}'
-    });
-   </script>`
-});
-
 new Vue({
     el: '#guestbook',
     data: {
@@ -24,6 +12,17 @@ new Vue({
             e.preventDefault();
             var files = e.target.files || e.dataTransfer.files;
             this.formInputs.attachment = files[0];
+        },
+        pnotify: function (message, type) {
+            type = type ? type : 'success';
+            var html = "<div class=\"notify\">";
+                html += message;
+            html += "</div>";
+            PNotify.prototype.options.styling = "bootstrap3";
+            new PNotify({
+                text: html,
+                type: type
+            });
         },
         submitForm: function (e) {
             e.preventDefault();
@@ -49,6 +48,7 @@ new Vue({
                 this.ajaxStart(false);
                 this.formInputs = {};
                 this.success = true;
+                this.pnotify(response.data.data.message);
                 $('#guestbook').trigger('reset');
                 $('.fileinput').fileinput('reset');
             }).catch(function (data, status, request) {

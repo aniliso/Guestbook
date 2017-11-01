@@ -2,8 +2,8 @@
 
 return [
     'comment' => [
-        'index' => 'patient/feedbacks',
-        'form'  => 'patient/feedback',
-        'add'   => 'patient/feedback/add'
+        'index' => 'guestbook',
+        'form'  => 'guestbook/feedback',
+        'add'   => 'guestbook/feedback/add'
     ]
 ];

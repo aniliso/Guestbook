@@ -3,10 +3,9 @@
 namespace Modules\Guestbook\Http\Controllers;
 
 use Illuminate\Contracts\Encryption\DecryptException;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Core\Http\Controllers\BasePublicController;
-use Modules\Guestbook\Http\Requests\CreateCommentRequest;
+use Modules\Guestbook\Http\Requests\Api\CreateCommentRequest;
 use Modules\Guestbook\Mail\GuestbookCommentCreated;
 use Modules\Guestbook\Repositories\CommentRepository;
 use Modules\Media\Services\FileService;

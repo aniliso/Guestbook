@@ -4,7 +4,7 @@ namespace Modules\Guestbook\Http\Requests;
 
 use Modules\Core\Internationalisation\BaseFormRequest;
 
-class CreateCommentRequest extends BaseFormRequest
+class UpdateCommentRequest extends BaseFormRequest
 {
     /**
      * Get the validation rules that apply to the request.

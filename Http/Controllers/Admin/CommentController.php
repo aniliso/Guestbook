@@ -5,8 +5,11 @@ namespace Modules\Guestbook\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Guestbook\Entities\Comment;
+use Modules\Guestbook\Http\Requests\CreateCommentRequest;
+use Modules\Guestbook\Http\Requests\UpdateCommentRequest;
 use Modules\Guestbook\Repositories\CommentRepository;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
+use Modules\Media\Services\FileService;
 
 class CommentController extends AdminBaseController
 {
@@ -14,12 +17,17 @@ class CommentController extends AdminBaseController
      * @var CommentRepository
      */
     private $comment;
+    /**
+     * @var FileService
+     */
+    private $fileService;
 
-    public function __construct(CommentRepository $comment)
+    public function __construct(CommentRepository $comment, FileService $fileService)
     {
         parent::__construct();
 
         $this->comment = $comment;
+        $this->fileService = $fileService;
     }
 
     /**
@@ -50,9 +58,17 @@ class CommentController extends AdminBaseController
      * @param  Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateCommentRequest $request)
     {
-        $this->comment->create($request->all());
+        $requestData = $request->all();
+        if($request->hasFile('attachment')) {
+            $file = $this->fileService->store($request->file('attachment'));
+            $requestData['attachment'] = $file->id;
+        } else {
+            $requestData['attachment'] = null;
+        }
+
+        $this->comment->create($requestData);
 
         return redirect()->route('admin.guestbook.comment.index')
             ->withSuccess(trans('core::core.messages.resource created', ['name' => trans('guestbook::comments.title.comments')]));
@@ -76,9 +92,17 @@ class CommentController extends AdminBaseController
      * @param  Request $request
      * @return Response
      */
-    public function update(Comment $comment, Request $request)
+    public function update(Comment $comment, UpdateCommentRequest $request)
     {
-        $this->comment->update($comment, $request->all());
+        $requestData = $request->all();
+        if($request->hasFile('attachment')) {
+            $file = $this->fileService->store($request->file('attachment'));
+            $requestData['attachment'] = $file->id;
+        } else {
+            $requestData['attachment'] = null;
+        }
+
+        $this->comment->update($comment, $requestData);
 
         return redirect()->route('admin.guestbook.comment.index')
             ->withSuccess(trans('core::core.messages.resource updated', ['name' => trans('guestbook::comments.title.comments')]));

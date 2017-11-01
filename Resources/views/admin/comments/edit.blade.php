@@ -16,37 +16,12 @@
 @stop
 
 @section('content')
-    {!! Form::open(['route' => ['admin.guestbook.comment.update', $comment->id], 'method' => 'put']) !!}
+    {!! Form::open(['route' => ['admin.guestbook.comment.update', $comment->id], 'method' => 'put', 'files'=>true]) !!}
     <div class="row">
         <div class="col-md-10">
             <div class="box">
                 <div class="box-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            {!! Form::normalInput("first_name", trans('guestbook::comments.form.first_name'), $errors, $comment) !!}
-                        </div>
-                        <div class="col-sm-6">
-                            {!! Form::normalInput("last_name", trans('guestbook::comments.form.last_name'), $errors, $comment) !!}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            {!! Form::normalInput("email", trans('guestbook::comments.form.email'), $errors, $comment) !!}
-                        </div>
-                        <div class="col-sm-6">
-                            {!! Form::normalInput("phone", trans('guestbook::comments.form.phone'), $errors, $comment) !!}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            {!! Form::normalInput("subject", trans('guestbook::comments.form.subject'), $errors, $comment) !!}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            {!! BSForm::textarea('message', $comment->message, ['class'=>'textarea']) !!}
-                        </div>
-                    </div>
+                    @include('guestbook::admin.comments.partials.edit-fields')
                 </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary btn-flat">{{ trans('core::core.button.update') }}</button>
@@ -62,12 +37,17 @@
 
                     {!! Form::normalInput("position", trans('guestbook::comments.form.position'), $errors, $comment) !!}
 
+                    <div class="form-group{{ $errors->has("attachment") ? ' has-error' : '' }}">
+                        {!! Form::file('attachment',['class'=>'form-control-file']) !!}
+                        {!! $errors->first("attachment", '<span class="help-block">:message</span>') !!}
+                    </div>
+
+                    @if($image = $comment->present()->firstImage(100,null,'resize',50))
                     <div class="form-group">
                         <label>Resim</label>
-                        @if($image = $comment->present()->firstImage(250,null,'resize',50))
-                            <figure><img class="img-responsive" src="{{ $image }}" alt="{{ $comment->fullname }}" /></figure>
-                        @endif
+                        <figure><img class="img-responsive" src="{{ $image }}" alt="{{ $comment->fullname }}" /></figure>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

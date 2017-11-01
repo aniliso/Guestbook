@@ -1,7 +1,8 @@
 <?php
 
-namespace Modules\Guestbook\Http\Api\Requests;
+namespace Modules\Guestbook\Http\Requests\Api;
 
+use Illuminate\Http\Response;
 use Modules\Core\Internationalisation\BaseFormRequest;
 
 class CreateCommentRequest extends BaseFormRequest
@@ -14,9 +15,13 @@ class CreateCommentRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|min:2',
-            'last_name' => 'required:min:2',
-            'phone' => 'required|integer',
+            'first_name'           => 'required|min:2',
+            'last_name'            => 'required:min:2',
+            'phone'                => 'required|numeric',
+            'email'                => 'required|email',
+            'message'              => 'required|min:50|max:500',
+            'captcha_guestbook'    => 'required|captcha',
+            'attachment'           => 'mimes:jpeg,jpg,png'
         ];
     }
 
@@ -33,5 +38,18 @@ class CreateCommentRequest extends BaseFormRequest
     public function authorize()
     {
         return true;
+    }
+
+    public function response(array $errors)
+    {
+        return response()->json([
+            'success' => false,
+            'message' => $errors
+        ], Response::HTTP_BAD_REQUEST);
+    }
+
+    public function messages()
+    {
+        return trans('validation');
     }
 }

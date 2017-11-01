@@ -16,27 +16,37 @@
 @stop
 
 @section('content')
-    {!! Form::open(['route' => ['admin.guestbook.comment.store'], 'method' => 'post']) !!}
+    {!! Form::open(['route' => ['admin.guestbook.comment.store'], 'method' => 'post', 'files'=>true]) !!}
     <div class="row">
-        <div class="col-md-12">
-            <div class="nav-tabs-custom">
-                @include('partials.form-tab-headers')
-                <div class="tab-content">
-                    <?php $i = 0; ?>
-                    @foreach (LaravelLocalization::getSupportedLocales() as $locale => $language)
-                        <?php $i++; ?>
-                        <div class="tab-pane {{ locale() == $locale ? 'active' : '' }}" id="tab_{{ $i }}">
-                            @include('guestbook::admin.comments.partials.create-fields', ['lang' => $locale])
-                        </div>
-                    @endforeach
+        <div class="col-md-10">
+            <div class="box">
+                <div class="box-body">
+
+                    @include('guestbook::admin.comments.partials.create-fields')
 
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary btn-flat">{{ trans('core::core.button.create') }}</button>
                         <button class="btn btn-default btn-flat" name="button" type="reset">{{ trans('core::core.button.reset') }}</button>
                         <a class="btn btn-danger pull-right btn-flat" href="{{ route('admin.guestbook.comment.index')}}"><i class="fa fa-times"></i> {{ trans('core::core.button.cancel') }}</a>
                     </div>
+
                 </div>
-            </div> {{-- end nav-tabs-custom --}}
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="box">
+                <div class="box-body">
+                    {!! Form::normalSelect('status', trans('global.form.status'), $errors, app(\Modules\Core\Models\Status::class)->lists()) !!}
+
+                    {!! Form::normalInput("position", trans('guestbook::comments.form.position'), $errors) !!}
+
+                    <div class="form-group{{ $errors->has("attachment") ? ' has-error' : '' }}">
+                        {!! Form::file('attachment',['class'=>'form-control-file']) !!}
+                        {!! $errors->first("attachment", '<span class="help-block">:message</span>') !!}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     {!! Form::close() !!}

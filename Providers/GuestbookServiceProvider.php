@@ -28,6 +28,11 @@ class GuestbookServiceProvider extends ServiceProvider
     {
         $this->registerBindings();
 
+        $this->app->extend('asgard.ModulesList', function($app) {
+            array_push($app, 'guestbook');
+            return $app;
+        });
+
         $this->app['events']->listen(
             BuildingSidebar::class,
             $this->getSidebarClassForModule('guestbook', RegisterGuestbookSidebar::class)

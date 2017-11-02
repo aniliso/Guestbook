@@ -18,7 +18,7 @@ class RegisterGuestbookSidebar extends AbstractAdminSidebar
     {
         $menu->group(trans('core::sidebar.content'), function (Group $group) {
             $group->item(trans('guestbook::guestbook.title.guestbook'), function (Item $item) {
-                $item->icon('fa fa-copy');
+                $item->icon('fa fa-comment');
                 $item->weight(10);
                 $item->route('admin.guestbook.comment.index');
                 $item->authorize(

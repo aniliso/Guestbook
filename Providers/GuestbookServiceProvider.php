@@ -32,6 +32,10 @@ class GuestbookServiceProvider extends ServiceProvider
             BuildingSidebar::class,
             $this->getSidebarClassForModule('guestbook', RegisterGuestbookSidebar::class)
         );
+
+        $this->app->singleton('guestbookRepo', function(){
+            return $this->app->make(CommentRepository::class);
+        });
     }
 
     public function boot()

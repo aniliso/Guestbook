@@ -19,9 +19,9 @@ class CreateCommentRequest extends BaseFormRequest
             'last_name'            => 'required:min:2',
             'phone'                => 'required|numeric',
             'email'                => 'required|email',
-            'message'              => 'required|min:50|max:500',
+            'message'              => 'required|min:2|max:3000',
             'captcha_guestbook'    => 'required|captcha',
-            'attachment'           => 'mimes:jpeg,jpg,png'
+            'attachment'           => 'mimes:jpeg,jpg,png|max:200'
         ];
     }
 

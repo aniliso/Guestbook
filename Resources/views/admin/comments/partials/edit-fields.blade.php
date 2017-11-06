@@ -16,6 +16,6 @@
 </div>
 <div class="row">
     <div class="col-sm-12">
-        {!! BSForm::textarea('message', $comment->message, ['class'=>'textarea']) !!}
+        {!! Form::textarea('message', $comment->message, ['class'=>'form-control textarea']) !!}
     </div>
 </div>

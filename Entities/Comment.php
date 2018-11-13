@@ -12,7 +12,7 @@ class Comment extends Model
     use PresentableTrait;
 
     protected $table = 'guestbook__comments';
-    protected $fillable = ['first_name', 'last_name', 'email', 'phone', 'subject', 'message', 'attachment', 'status'];
+    protected $fillable = ['first_name', 'last_name', 'email', 'phone', 'subject', 'message', 'attachment', 'position','status'];
     protected $presenter = CommentPresenter::class;
     protected $casts = [
       'status' => 'int'

@@ -95,11 +95,10 @@ class CommentController extends AdminBaseController
     public function update(Comment $comment, UpdateCommentRequest $request)
     {
         $requestData = $request->all();
+
         if($request->hasFile('attachment')) {
             $file = $this->fileService->store($request->file('attachment'));
             $requestData['attachment'] = $file->id;
-        } else {
-            $requestData['attachment'] = null;
         }
 
         $this->comment->update($comment, $requestData);

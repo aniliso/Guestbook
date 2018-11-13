@@ -41,6 +41,8 @@ class GuestbookServiceProvider extends ServiceProvider
         $this->app->singleton('guestbookRepo', function(){
             return $this->app->make(CommentRepository::class);
         });
+
+        \Widget::register('guestbookLatest', '\Modules\Guestbook\Widgets\GuestbookWidgets@latest');
     }
 
     public function boot()

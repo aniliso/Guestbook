@@ -64,8 +64,6 @@ class CommentController extends AdminBaseController
         if($request->hasFile('attachment')) {
             $file = $this->fileService->store($request->file('attachment'));
             $requestData['attachment'] = $file->id;
-        } else {
-            $requestData['attachment'] = null;
         }
 
         $this->comment->create($requestData);
@@ -99,6 +97,9 @@ class CommentController extends AdminBaseController
         if($request->hasFile('attachment')) {
             $file = $this->fileService->store($request->file('attachment'));
             $requestData['attachment'] = $file->id;
+        } elseif(empty($requestData['file_id'])) {
+            $this->fileService->remove($comment->attachment()->first());
+            $requestData['attachment'] = null;
         }
 
         $this->comment->update($comment, $requestData);

@@ -44,8 +44,12 @@
 
                     @if($image = $comment->present()->firstImage(100,null,'resize',50))
                     <div class="form-group">
-                        <label>Resim</label>
-                        <figure><img class="img-responsive" src="{{ $image }}" alt="{{ $comment->fullname }}" /></figure>
+                        <div class="filegroup">
+                            <label>Resim</label>
+                            <a class="btn btn-danger btn-xs" id="delete_file">X</a>
+                            <figure><img class="img-responsive" src="{{ $image }}" alt="{{ $comment->fullname }}" /></figure>
+                            <input type="hidden" name="file_id" value="{{ $comment->attachment()->first()->id ?? null }}" />
+                        </div>
                     </div>
                     @endif
                 </div>
@@ -66,12 +70,25 @@
 @stop
 
 @section('scripts')
+    <style>
+        .filegroup {
+            position: relative;
+        }
+        #delete_file {
+            position: absolute;
+            top: 30px;
+            left: 5px;
+        }
+    </style>
     <script type="text/javascript">
         $( document ).ready(function() {
             $(document).keypressAction({
                 actions: [
                     { key: 'b', route: "<?= route('admin.guestbook.comment.index') ?>" }
                 ]
+            });
+            $('#delete_file').on('click',function () {
+                $(this).parent().remove();
             });
         });
     </script>
